@@ -1,9 +1,9 @@
 P1
 ==
 
-Tools to read information from your Dutch Smart Meter's ("slimme meter") P1 port.
+Tools to read information from your Dutch Smart Meter's ("slimme meter") P1 port. The script uses some standards from the Dutch Smart Meter Requirements (DSMR) P1 standard.
 
-Before even using the script on your Linux system, make sure "cu" is installed and "cu -l /dev/ttyUSB0 -s 9600 --parity=none" is working.
+Before using the script on your Linux system, make sure "cu" is installed and "cu -l /dev/ttyUSB0 -s 9600 --parity=none" is working as in: gives you (semi) correct information.
 
 The python script will run the cu command until correct output is received from P1 (with a maximum of 100 tries).
 

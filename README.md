@@ -3,6 +3,10 @@ P1
 
 Tools to read information from your Dutch Smart Meter's P1 port.
 
+Before even using the script on your Linux system, make sure "cu" is installed and "cu -l /dev/ttyUSB0 -s 9600 --parity=none" is working.
+
+
+
 
 Example output:
 

@@ -5,6 +5,7 @@ Tools to read information from your Dutch Smart Meter's P1 port.
 
 Before even using the script on your Linux system, make sure "cu" is installed and "cu -l /dev/ttyUSB0 -s 9600 --parity=none" is working.
 
+The python script will run the cu command until correct output is received from P1 (with a maximum of 100 tries).
 
 
 

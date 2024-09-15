@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+
+'''
+read info from your smar meter's P1
+
+'''
+
 import serial # pyserial
 
 

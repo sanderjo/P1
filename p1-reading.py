@@ -176,7 +176,7 @@ if __name__ == "__main__":
 	1-0:2.8.2(00019.000*kWh) (Totaal geleverd tarief 2 (dag))
 	'''
 	totaal_kWh = float(info['1-0:1.8.1'][0]) + float(info['1-0:1.8.2'][0]) - float(info['1-0:2.8.1'][0]) - float(info['1-0:2.8.2'][0])
-	print(f"totaal_kWh verbruik {totaal_kWh:.2f} kWh")
+	print(f"totaal_kWh verbruik [kWh] {totaal_kWh:.2f}")
 
 	# current usage in Watt
 	'''
@@ -184,10 +184,10 @@ if __name__ == "__main__":
 	1-0:2.7.0(0000.00*kW) (huidige teruglevering)
 	'''
 	netto_momentaan_verbruik = float(info['1-0:1.7.0'][0]) - float(info['1-0:2.7.0'][0])
-	print(f"netto verbruik {netto_momentaan_verbruik} W")
+	print(f"netto verbruik [W] {netto_momentaan_verbruik}")
 
 	# spanning
 	spanning = float(info['1-0:32.7.0'][0])
-	print(f"spanning {spanning} V")
+	print(f"spanning [V] {spanning}")
 
 

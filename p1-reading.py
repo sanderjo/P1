@@ -183,8 +183,8 @@ if __name__ == "__main__":
 	1-0:1.7.0(0000.98*kW) (huidig verbruik)
 	1-0:2.7.0(0000.00*kW) (huidige teruglevering)
 	'''
-	netto_momentaan_verbruik = float(info['1-0:1.7.0'][0]) - float(info['1-0:2.7.0'][0])
-	print(f"netto verbruik [W] {netto_momentaan_verbruik}")
+	netto_momentaan_verbruik = 1000 * (float(info['1-0:1.7.0'][0]) - float(info['1-0:2.7.0'][0]))
+	print(f"netto verbruik [W] {netto_momentaan_verbruik:.0f}")
 
 	# spanning
 	spanning = float(info['1-0:32.7.0'][0])

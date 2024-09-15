@@ -146,19 +146,15 @@ def parse_P1_info(p1_output):
 	for line in p1_output.split('\n'):
 		if not line.startswith('!') and not line.startswith('/'):
 			try:
-				#print("\n", line)
 				splitline = line.replace('(',' ').replace(')',' ').split()
-				# splitline = line.strip().replace('(', ' ').replace(')',' ').split(' ')
-				#print(splitline)
 				id = splitline[0]
 				try:
 					value, unity = splitline[-1].split('*')
-					#print(id, value, unity)
 					info[id] = [value, unity]
 				except:
+					# no '*', so just a value, no unity
 					value = splitline[-1]
 					info[id] = [value, None]
-					#print(id, value)
 			except:
 				pass
 	return info
@@ -167,36 +163,30 @@ def parse_P1_info(p1_output):
 
 if __name__ == "__main__":
 
-	if len(sys. argv) <= 1:
-		print("Geen argument, dus defaul string gebruiken")
-		info = parse_P1_info(p1_output)
-	else:
-		# really read from
+	if len(sys. argv)>1:
+		# really read from P1
 		p1_output = get_P1_info()
-		info = parse_P1_info(p1_output)
+	info = parse_P1_info(p1_output)
 
 	# kWh info:
-
 	'''
 	1-0:1.8.1(00185.000*kWh) (Totaal verbruik tarief 1 (nacht))
 	1-0:1.8.2(00084.000*kWh) (Totaal verbruik tarief 2 (dag))
 	1-0:2.8.1(00013.000*kWh) (Totaal geleverd tarief 1 (nacht))
 	1-0:2.8.2(00019.000*kWh) (Totaal geleverd tarief 2 (dag))
 	'''
-
 	totaal_kWh = float(info['1-0:1.8.1'][0]) + float(info['1-0:1.8.2'][0]) - float(info['1-0:2.8.1'][0]) - float(info['1-0:2.8.2'][0])
 	print(f"totaal_kWh verbruik {totaal_kWh:.2f} kWh")
 
-	# current usage
-
+	# current usage in Watt
 	'''
 	1-0:1.7.0(0000.98*kW) (huidig verbruik)
 	1-0:2.7.0(0000.00*kW) (huidige teruglevering)
 	'''
-
 	netto_momentaan_verbruik = float(info['1-0:1.7.0'][0]) - float(info['1-0:2.7.0'][0])
 	print(f"netto verbruik {netto_momentaan_verbruik} W")
 
+	# spanning
 	spanning = float(info['1-0:32.7.0'][0])
 	print(f"spanning {spanning} V")
 

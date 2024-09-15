@@ -126,8 +126,8 @@ def get_P1_info():
 	try:
 		ser = serial.Serial('/dev/ttyUSB0', 115200)
 		# OK, got a connection
-		# now read 100 entries
-		for _ in range(100):
+		# now read 60 lines
+		for _ in range(60):
 			myline = ser.readline()
 			try:
 				myline = myline.decode("ascii").strip()

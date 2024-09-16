@@ -121,10 +121,11 @@ p1_output = """
 1-0:2.7.0(0000.00*kW) (huidige teruglevering)
 '''
 
-def get_P1_info():
+def read_info_from_P1(device):
 	P1_output = ""
+	error = False
 	try:
-		ser = serial.Serial('/dev/ttyUSB0', 115200)
+		ser = serial.Serial(device, 115200)
 		# OK, got a connection
 		# now read 60 lines
 		for _ in range(60):
@@ -137,8 +138,9 @@ def get_P1_info():
 			except:
 				pass
 	except:
-		pass
-	return P1_output
+		P1_output += f"errrrrrrrrrrrorrrrrrrrrrrrrr: could not read from {device}"
+		error = True
+	return P1_output, error
 
 def parse_P1_info(p1_output):
 	info = dict()
@@ -165,7 +167,12 @@ if __name__ == "__main__":
 
 	if len(sys. argv)>1:
 		# really read from P1
-		p1_output = get_P1_info()
+		device = sys.argv[1]
+		print(f"Reading from device {device}")
+		p1_output, error = read_info_from_P1(device)
+		if error:
+			print(f"error reading from P1 {device}")
+			sys.exit(-1)
 	info = parse_P1_info(p1_output)
 
 	# kWh info:

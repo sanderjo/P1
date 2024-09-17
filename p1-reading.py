@@ -173,7 +173,7 @@ if __name__ == "__main__":
 			print(f"Devide {device} does not exist")
 			sys.exit(-1)
 		if not os.access(device, os.R_OK):
-			print(f"Devide {device} does exist, but not readable")
+			print(f"Device {device} does exist, but is not readable. Use 'sudo chmod 666 {device}' ")
 			sys.exit(-1)
 		print(f"Reading from device {device}")
 		p1_output, error = read_info_from_P1(device)

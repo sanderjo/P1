@@ -6,6 +6,7 @@ read info from your smar meter's P1
 '''
 
 import sys
+import os
 import serial # pyserial
 
 
@@ -168,6 +169,12 @@ if __name__ == "__main__":
 	if len(sys. argv)>1:
 		# really read from P1
 		device = sys.argv[1]
+		if not os.path.exists('/dev/ttyUSB0'):
+			print(f"Devide {device} does not exist")
+			sys.exit(-1)
+		if not os.access(device, os.R_OK):
+			print(f"Devide {device} does exist, but not readable")
+			sys.exit(-1)
 		print(f"Reading from device {device}")
 		p1_output, error = read_info_from_P1(device)
 		if error:

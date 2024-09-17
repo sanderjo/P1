@@ -180,6 +180,8 @@ if __name__ == "__main__":
 		if error:
 			print(f"error reading from P1 {device}")
 			sys.exit(-1)
+	else:
+		print("No device specified, so using dummy P1 info")
 	info = parse_P1_info(p1_output)
 
 	# kWh info:

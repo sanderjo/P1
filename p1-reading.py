@@ -167,9 +167,9 @@ def parse_P1_info(p1_output):
 if __name__ == "__main__":
 
 	if len(sys. argv)>1:
-		# really read from P1
+		# device specified, so try to read from specified device = P1.
 		device = sys.argv[1]
-		if not os.path.exists('/dev/ttyUSB0'):
+		if not os.path.exists(device):
 			print(f"Devide {device} does not exist")
 			sys.exit(-1)
 		if not os.access(device, os.R_OK):
@@ -205,5 +205,13 @@ if __name__ == "__main__":
 	# spanning
 	spanning = float(info['1-0:32.7.0'][0])
 	print(f"spanning [V] {spanning}")
+
+
+	# gas
+	'''
+	0-1:24.2.1(240923162506S)(01261.390*m3)
+	'''
+
+	print("Gas [m3]", float(info['0-1:24.2.1'][0]))
 
 

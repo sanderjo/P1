@@ -166,22 +166,26 @@ def parse_P1_info(p1_output):
 
 if __name__ == "__main__":
 
-	if len(sys. argv)>1:
-		# device specified, so try to read from specified device = P1.
+	try:
 		device = sys.argv[1]
-		if not os.path.exists(device):
-			print(f"Devide {device} does not exist")
-			sys.exit(-1)
-		if not os.access(device, os.R_OK):
-			print(f"Device {device} does exist, but is not readable. Use 'sudo chmod 666 {device}' ")
-			sys.exit(-1)
-		print(f"Reading from device {device}")
-		p1_output, error = read_info_from_P1(device)
-		if error:
-			print(f"error reading from P1 {device}")
-			sys.exit(-1)
+	except:
+		device = '/dev/ttyUSB0'
+		print(f"no device given, so defaulting to {device}")
+
+
+	# now check if device exist and is readable. If not, use default string
+	if os.path.exists(device):
+		if os.access(device, os.R_OK):
+			# OK!
+			p1_output, error = read_info_from_P1(device)
+			if error:
+				print(f"error reading from P1 {device}")
+				sys.exit(-1)
+		else:
+			print(f"error reading from P1 {device}. Using dummy/default p1_output")
 	else:
-		print("No device specified, so using dummy P1 info")
+		print(f"Device {device} does not exist. Using dummy/default p1_output.")
+
 	info = parse_P1_info(p1_output)
 
 	# kWh info:

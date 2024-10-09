@@ -8,7 +8,7 @@ read info from your smar meter's P1
 import sys
 import os
 import serial # pyserial
-
+from datetime import datetime
 
 p1_output = """
 /ISK5\2M550E-1013
@@ -187,6 +187,8 @@ if __name__ == "__main__":
 		print(f"Device {device} does not exist. Using dummy/default p1_output.")
 
 	info = parse_P1_info(p1_output)
+
+	print(datetime.now().strftime('Date: %Y-%m-%d,%H:%M,%A'))
 
 	# kWh info:
 	'''
